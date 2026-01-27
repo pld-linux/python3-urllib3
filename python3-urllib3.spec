@@ -8,13 +8,13 @@
 Summary:	HTTP library with thread-safe connection pooling, file post, and more
 Summary(pl.UTF-8):	Biblioteka HTTP z bezpieczną wątkowo pulą połączeń, wysyłaniem plików itd.
 Name:		python3-%{module}
-Version:	2.6.2
+Version:	2.6.3
 Release:	1
 License:	MIT
 Group:		Development/Languages/Python
 #Source0Download: https://pypi.org/simple/urllib3/
 Source0:	https://files.pythonhosted.org/packages/source/u/urllib3/%{module}-%{version}.tar.gz
-# Source0-md5:	838e0ffee00ec870a3ba6727a7832ab8
+# Source0-md5:	2c381874816fe551f50a2551abae62b3
 URL:		https://urllib3.readthedocs.io/
 %if %(locale -a | grep -q '^C\.utf8$'; echo $?)
 BuildRequires:	glibc-localedb-all
@@ -111,8 +111,7 @@ Dokumentacja API modułu Pythona urllib3.
 PYTHONPATH=$(pwd)/src \
 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \
 PYTEST_PLUGINS="anyio.pytest_plugin,pytest_memray.plugin,pytest_socket,pytest_timeout" \
-%{__python3} -m pytest test -k 'not (test_client_intermediate or test_client_key_password or test_alpn_default or test_http2_probe_result_is_cached or test_basic_proxy or test_https_proxy or test_is_verified_http_proxy_to_https_target or test_is_verified_https_proxy_to_https_target or test_http_and_https_kwarg_ca_cert_data_proxy or test_https_proxy_with_proxy_ssl_context or test_oldapi or test_proxy_verified or test_headers or test_https_headers or test_proxy_pooling or test_scheme_host_case_insensitive or test_https_proxy_assert_fingerprint_md5 or test_https_proxy_assert_hostname or test_https_proxy_ipv4_san or test_https_proxy_ipv6_san or test_https_proxy_no_san_hostname_checks_common_name)'
-# -k 'not (test_recent_date or test_ssl_read_timeout or test_ssl_failed_fingerprint_verification)'
+%{__python3} -m pytest test -k 'not (test_client_intermediate or test_client_key_password or test_alpn_default or test_http2_probe_result_is_cached or test_basic_proxy or test_https_proxy or test_is_verified_http_proxy_to_https_target or test_is_verified_https_proxy_to_https_target or test_http_and_https_kwarg_ca_cert_data_proxy or test_https_proxy_with_proxy_ssl_context or test_oldapi or test_proxy_verified or test_headers or test_https_headers or test_proxy_pooling or test_scheme_host_case_insensitive or test_https_proxy_assert_fingerprint_md5 or test_https_proxy_assert_hostname or test_https_proxy_ipv4_san or test_https_proxy_ipv6_san or test_https_proxy_no_san_hostname_checks_common_name or test_proxy_https_target_tls_error)'
 %endif
 
 %if %{with doc}
