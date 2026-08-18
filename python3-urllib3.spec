@@ -9,7 +9,7 @@ Summary:	HTTP library with thread-safe connection pooling, file post, and more
 Summary(pl.UTF-8):	Biblioteka HTTP z bezpieczną wątkowo pulą połączeń, wysyłaniem plików itd.
 Name:		python3-%{module}
 Version:	2.7.0
-Release:	1
+Release:	2
 License:	MIT
 Group:		Development/Languages/Python
 #Source0Download: https://pypi.org/simple/urllib3/
@@ -109,12 +109,13 @@ Dokumentacja API modułu Pythona urllib3.
 
 %if %{with tests}
 # TestHTTPS_TLSv1_[23] tests: fail because of no ["extensions"]["tls"] key in quart request scope(???)
+# test_http2_probe_blocked_per_thread: needs TARPIT_HOST 240.0.0.0 to hang, it fails instantly without net
 # TestHTTPProxyManager and TestHTTPSProxyVerification: the CONNECT proxy in dummyserver/asgi_proxy.py
 # needs scope["extensions"]["_transport"] to hijack the socket; hypercorn 0.18 exposes no ASGI extensions at all
 PYTHONPATH=$(pwd)/src \
 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 \
 PYTEST_PLUGINS="anyio.pytest_plugin,pytest_memray.plugin,pytest_socket,pytest_timeout" \
-%{__python3} -m pytest test -k 'not (test_client_intermediate or test_client_key_password or test_alpn_default or test_http2_probe_result_is_cached or test_basic_proxy or test_https_proxy or test_is_verified_http_proxy_to_https_target or test_is_verified_https_proxy_to_https_target or test_http_and_https_kwarg_ca_cert_data_proxy or test_https_proxy_with_proxy_ssl_context or test_oldapi or test_proxy_verified or test_headers or test_https_headers or test_proxy_pooling or test_scheme_host_case_insensitive or test_https_proxy_assert_fingerprint_md5 or test_https_proxy_assert_hostname or test_https_proxy_ipv4_san or test_https_proxy_ipv6_san or test_https_proxy_no_san_hostname_checks_common_name or test_proxy_https_target_tls_error or test_proxy_https_fqdn or test_cross_protocol_redirect)'
+%{__python3} -m pytest test -k 'not (test_client_intermediate or test_client_key_password or test_alpn_default or test_http2_probe_result_is_cached or test_basic_proxy or test_https_proxy or test_is_verified_http_proxy_to_https_target or test_is_verified_https_proxy_to_https_target or test_http_and_https_kwarg_ca_cert_data_proxy or test_https_proxy_with_proxy_ssl_context or test_oldapi or test_proxy_verified or test_headers or test_https_headers or test_proxy_pooling or test_scheme_host_case_insensitive or test_https_proxy_assert_fingerprint_md5 or test_https_proxy_assert_hostname or test_https_proxy_ipv4_san or test_https_proxy_ipv6_san or test_https_proxy_no_san_hostname_checks_common_name or test_proxy_https_target_tls_error or test_proxy_https_fqdn or test_cross_protocol_redirect or test_http2_probe_blocked_per_thread)'
 %endif
 
 %if %{with doc}
