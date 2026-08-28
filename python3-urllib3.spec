@@ -9,7 +9,7 @@ Summary:	HTTP library with thread-safe connection pooling, file post, and more
 Summary(pl.UTF-8):	Biblioteka HTTP z bezpieczną wątkowo pulą połączeń, wysyłaniem plików itd.
 Name:		python3-%{module}
 Version:	2.7.0
-Release:	2
+Release:	3
 License:	MIT
 Group:		Development/Languages/Python
 #Source0Download: https://pypi.org/simple/urllib3/
@@ -20,16 +20,16 @@ URL:		https://urllib3.readthedocs.io/
 %if %(locale -a | grep -q '^C\.utf8$'; echo $?)
 BuildRequires:	glibc-localedb-all
 %endif
-BuildRequires:	python3 >= 1:3.9
+BuildRequires:	python3 >= 1:3.10
 BuildRequires:	python3-build >= 1.2.2.post1
 BuildRequires:	python3-hatch-vcs >= 0.4.0
 BuildRequires:	python3-hatch-vcs < 0.6
 BuildRequires:	python3-hatchling >= 1.27.0
 BuildRequires:	python3-hatchling < 2
 BuildRequires:	python3-installer
-BuildRequires:	python3-modules >= 1:3.9
+BuildRequires:	python3-modules >= 1:3.10
 BuildRequires:	python3-setuptools_scm >= 8
-BuildRequires:	python3-setuptools_scm < 10
+BuildRequires:	python3-setuptools_scm < 11
 %if %{with tests}
 BuildRequires:	python3-PySocks >= 1.7.1
 BuildRequires:	python3-PySocks < 2
@@ -65,7 +65,7 @@ BuildRequires:	python3-sphinx_copybutton >= 0.5.2
 BuildRequires:	python3-sphinxext.opengraph >= 0.9.1
 BuildRequires:	sphinx-pdg-3 >= 7.2.6
 %endif
-Requires:	python3-modules >= 1:3.9
+Requires:	python3-modules >= 1:3.10
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
