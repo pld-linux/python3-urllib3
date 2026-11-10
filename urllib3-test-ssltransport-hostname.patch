@@ -1,0 +1,13 @@
+# CPython 3.13.16+ wrap_bio() rejects check_hostname without server_hostname (gh-156793)
+# https://github.com/urllib3/urllib3/pull/5289
+--- a/test/test_ssltransport.py
++++ b/test/test_ssltransport.py
+@@ -135,7 +135,7 @@
+         context = ssl.create_default_context()
+         sock.close()
+         with pytest.raises(OSError):
+-            SSLTransport(sock, context)
++            SSLTransport(sock, context, server_hostname="localhost")
+ 
+     @pytest.mark.timeout(PER_TEST_TIMEOUT)
+     def test_close_after_handshake(self) -> None:

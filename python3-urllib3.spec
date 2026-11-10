@@ -8,14 +8,15 @@
 Summary:	HTTP library with thread-safe connection pooling, file post, and more
 Summary(pl.UTF-8):	Biblioteka HTTP z bezpieczną wątkowo pulą połączeń, wysyłaniem plików itd.
 Name:		python3-%{module}
-Version:	2.7.0
-Release:	3
+Version:	2.8.0
+Release:	1
 License:	MIT
 Group:		Development/Languages/Python
 #Source0Download: https://pypi.org/simple/urllib3/
 Source0:	https://files.pythonhosted.org/packages/source/u/urllib3/%{module}-%{version}.tar.gz
-# Source0-md5:	e79707b798a66c8165c9c441440f4e80
-Patch0:		urllib3-parametrize-list.patch
+# Source0-md5:	e8ed250b4d520f9e3c0df3165953aa94
+Patch0:		urllib3-gzip-swallow-flush.patch
+Patch1:		urllib3-test-ssltransport-hostname.patch
 URL:		https://urllib3.readthedocs.io/
 %if %(locale -a | grep -q '^C\.utf8$'; echo $?)
 BuildRequires:	glibc-localedb-all
@@ -60,6 +61,7 @@ BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 2.044
 %if %{with doc}
 BuildRequires:	python3-furo >= 2024.8.6
+BuildRequires:	python3-myst_parser >= 5.1.0
 BuildRequires:	python3-requests >= 2.32.3
 BuildRequires:	python3-sphinx_copybutton >= 0.5.2
 BuildRequires:	python3-sphinxext.opengraph >= 0.9.1
@@ -103,6 +105,7 @@ Dokumentacja API modułu Pythona urllib3.
 %prep
 %setup -q -n %{module}-%{version}
 %patch -P0 -p1
+%patch -P1 -p1
 
 %build
 %py3_build_pyproject
